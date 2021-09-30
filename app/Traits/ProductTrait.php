@@ -26,12 +26,13 @@ trait ProductTrait
               return   $this->ListagemDeProductByIdTrait($productId->productId);
             }
 
+
             $resource = ProductModel::create([
                 'productId' => $product['productId'],
                 'productName' => $product['productName'],
                 'brand' => $product['brand']
             ]);
-            return $resource;
+
 
         }catch(\Exception $e) {
             return [

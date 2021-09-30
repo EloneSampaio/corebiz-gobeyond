@@ -16,7 +16,7 @@ class VtexSearchService {
         $result = $this->connectGet($url);
         $result = json_decode($result, true);
 
-if($result){
+    if($result){
           foreach($result as $item){
             $item['productId'] = (int) $item['productId'];
 
@@ -29,8 +29,8 @@ if($result){
 
 
 
-         $result=$this->CreateProductsTrait($data);
-         return $result;
+        return $this->CreateProductsTrait($data);
+
     }
     else{
         return [
