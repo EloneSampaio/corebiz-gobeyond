@@ -2,33 +2,42 @@
 
 namespace App\Services;
 
+use App\Traits\ProductTrait;
 
 //? Classe de serviço Search, que utiliza a conexão.
 class VtexSearchService {
 
     use VtexConnect;
+    use ProductTrait;
 
     public function searchServiceVtex($url)
     {
-    
-        $result = $this->connectGet($url)->collect();
 
-        return $result->filter(function($item){
-            return $item['productId'] == "10015499";
-        })->map(function($item){
-            
+        $result = $this->connectGet($url);
+        $result = json_decode($result, true);
+
+if($result){
+          foreach($result as $item){
             $item['productId'] = (int) $item['productId'];
 
-            return [
+            $data= [
                 'productId' => $item['productId'],
                 'productName' => $item['productName'],
                 'brand' => $item['brand']
             ];
-        })
-        ->values();
+        };
 
-        // dd($result);
 
+
+         $result=$this->CreateProductsTrait($data);
+         return $result;
+    }
+    else{
+        return [
+            'status' => 200,
+            'data' => 'produto não existe'
+        ];
+    }
     }
 
 }

@@ -44,7 +44,8 @@ Route::delete('deletar-pessoa/{id}','APIPessoasController@deletePessoa');
 
 //? Rotas services
 
-Route::get('listagem-search', 'ServicesAPIVtexController@listagemSearchVtex');
+Route::get('listagem-search/{productId}', 'ServicesAPIVtexController@listagemSearchByIdVtex');
+
 
 
 Route::get('test', 'APIPessoasController@test');

@@ -13,16 +13,22 @@ class ServicesAPIVtexController extends Controller
     public function __construct()
     {
         //? Controller API VTEX que utiliza o Service Search, podendo utilizar diversos Services Diferentes.
-        $this->endpointSearch = new VtexSearchService();  
+        $this->endpointSearch = new VtexSearchService();
     }
-    
 
-    public function listagemSearchVtex()
+
+    public function listagemSearchByIdVtex(Request $request)
     {
 
-        $result = $this->endpointSearch->searchServiceVtex("https://loja.chillibeans.com.br/api/catalog_system/pub/products/search?Rayban");
+        if (env('URL_CHIL')){
+           $URL= env('URL_CHIL').$request->productId;
+        }
+
+        $result = $this->endpointSearch->searchServiceVtex($URL);
 
         return $result;
     }
+
+
 
 }
